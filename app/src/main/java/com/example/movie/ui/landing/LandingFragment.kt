@@ -2,15 +2,18 @@ package com.example.movie.ui.landing
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movie.R
 import com.example.movie.model.Status
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_landing.*
+import kotlinx.android.synthetic.main.layout_error.*
 import kotlinx.android.synthetic.main.layout_loading.*
 import timber.log.Timber
 
@@ -26,33 +29,40 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
 
         movieAdapter = MovieAdapter()
         rvMovie.layoutManager = LinearLayoutManager(requireContext())
-        rvMovie.adapter = movieAdapter
+        rvMovie.adapter = movieAdapter.withLoadStateFooter(
+            MovieFooterStateAdapter{
+                movieAdapter.retry()
+            }
+        )
+
+        movieAdapter.addLoadStateListener { loadStates ->
+            srl.isRefreshing = loadStates.source.refresh is LoadState.Loading
+            IIErrorContainer.isVisible = loadStates.source.refresh is LoadState.Error
+            rvMovie.isVisible = !IIErrorContainer.isVisible
+
+            if (loadStates.source.refresh is LoadState.Error) {
+                btnRetry.setOnClickListener {
+                    movieAdapter.retry()
+                }
+
+                IIErrorContainer.isVisible = loadStates.source.refresh is LoadState.Error
+                val errorMessage = (loadStates.source.refresh as LoadState.Error).error.message
+                tvErrorMessage.text = errorMessage
+            }
+        }
+
+        srl.setOnRefreshListener {
+            landingViewModel.onRefresh()
+        }
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         landingViewModel.trendingMovies.observe(viewLifecycleOwner, Observer {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    showLoading(false)
-                    movieAdapter.setMovies(it.data!!)
-                }
-                Status.ERROR -> {
-                    showLoading(false)
-                    Snackbar.make(requireView(), it.message!!, Snackbar.LENGTH_SHORT).show()
-                }
-                Status.LOADING -> showLoading(true)
-            }
-
+            movieAdapter.submitData(lifecycle, it)
         })
     }
 
-    private fun showLoading(isShow: Boolean){
-        if (isShow){
-            loadingContainer.visibility = View.VISIBLE
-        }else {
-            loadingContainer.visibility = View.GONE
-        }
-    }
+
 }

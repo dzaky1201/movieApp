@@ -35,5 +35,14 @@ data class Movie(
     val posterPath: String?,
     val popularity: Double?,
     @Json(name = "media_type")
-    val mediaType: String?
+    val mediaType: String?,
+    val genres: List<Genre>?,
+    val runtime: Long?,
+    val credits: Credit?
+)
+
+@JsonClass(generateAdapter = true)
+data class Genre(
+    val id: Long,
+    val name: String
 )
