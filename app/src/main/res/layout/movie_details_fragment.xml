@@ -46,11 +46,11 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/standard"
         app:behavior_overlapTop = "68dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="@dimen/standard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -145,11 +145,10 @@
                 android:id="@+id/materialTextView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/overview"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ivPoster"
                 app:layout_constraintTop_toBottomOf="@+id/ivPoster" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -162,6 +161,31 @@
                 app:layout_constraintStart_toStartOf="@+id/materialTextView2"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView2"
                 tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cast"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cast"
+                android:layout_marginTop="@dimen/standard"
+                android:layout_marginBottom="@dimen/standard"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintEnd_toEndOf="@+id/tvOverview"
+                app:layout_constraintStart_toStartOf="@+id/tvOverview"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/standard_half"
+                app:layout_constraintEnd_toEndOf="@+id/tvOverview"
+                app:layout_constraintStart_toStartOf="@+id/cast"
+                app:layout_constraintTop_toBottomOf="@id/cast"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_cast" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

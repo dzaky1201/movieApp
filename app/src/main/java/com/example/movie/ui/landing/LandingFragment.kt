@@ -46,7 +46,7 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
                 }
 
                 IIErrorContainer.isVisible = loadStates.source.refresh is LoadState.Error
-                val errorMessage = (loadStates.source.refresh as LoadState.Error).error.message
+                val errorMessage = "Cek Koneksi anda"
                 tvErrorMessage.text = errorMessage
             }
         }
@@ -59,7 +59,7 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        landingViewModel.trendingMovies.observe(viewLifecycleOwner, Observer {
+        landingViewModel.trendingMovies.observe(viewLifecycleOwner, {
             movieAdapter.submitData(lifecycle, it)
         })
     }

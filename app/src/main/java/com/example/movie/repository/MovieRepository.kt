@@ -5,8 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.rxjava3.flowable
+import com.example.movie.model.Cast
 import com.example.movie.model.Movie
-import com.example.movie.model.Movies
 import com.example.movie.network.MovieService
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -33,6 +33,11 @@ class MovieRepository @Inject constructor(
 
     fun getMovieDetails(movieId: Long): Single<Movie>{
         return movieService.getMovie(movieId)
+            .subscribeOn(Schedulers.io())
+    }
+
+    fun getCastDetails(castId: Long): Single<Cast>{
+        return movieService.getCastDetails(castId)
             .subscribeOn(Schedulers.io())
     }
 }

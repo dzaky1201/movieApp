@@ -5,4 +5,18 @@
     <string name="overview">overview</string>
     <string name="format_runtime">%1$d m</string>
     <string name="retry">Retry</string>
+    <string name="cast">cast</string>
+    <string name="birthday">Birthday</string>
+    <string name="age">Age</string>
+    <string name="number_age">12</string>
+    <string name="place_of_birth">Place Of Birth</string>
+    <string name="Department">Department</string>
+    <string name="acting">Acting</string>
+    <string name="also">Also Known As</string>
+    <string name="name_cast">Dzaky Haidar</string>
+    <string name="deathDay">Death Day</string>
+    <string name="bioghrapy">Bioghrapy</string>
+    <string name="about">About</string>
+    <string name="photo">Photo</string>
+    <string name="dash">.</string>
 </resources>
