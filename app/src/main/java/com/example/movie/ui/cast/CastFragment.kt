@@ -2,9 +2,7 @@ package com.example.movie.ui.cast
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -40,6 +38,7 @@ class CastFragment : Fragment(R.layout.fragment_cast) {
         tvName.text = cast.name
 
         viewPager.adapter = ViewPagerAdapter(this, cast.id)
+        viewPager.offscreenPageLimit = 2
 
         TabLayoutMediator(tabLayout, viewPager){ tab, postion ->
             when (postion) {
@@ -63,7 +62,7 @@ class ViewPagerAdapter(fragment: Fragment, private val castId: Long) : FragmentS
                 AboutFragment.newInstance(castId)
             }
             else -> {
-                PhotoFragment.newInstance("1", "2")
+                PhotoFragment.newInstance(castId)
             }
         }
     }

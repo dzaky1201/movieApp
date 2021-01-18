@@ -7,6 +7,7 @@ import androidx.paging.PagingSource
 import androidx.paging.rxjava3.flowable
 import com.example.movie.model.Cast
 import com.example.movie.model.Movie
+import com.example.movie.model.ProfileImage
 import com.example.movie.network.MovieService
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -20,24 +21,32 @@ class MovieRepository @Inject constructor(
     private val movieService: MovieService,
     private val moviePagingCourse: MoviePagingSource
 ) {
-    fun getTrendingMovie(): Flowable<PagingData<Movie>>{
+    fun getTrendingMovie(): Flowable<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = false,
                 prefetchDistance = 1
             ),
-            pagingSourceFactory = {moviePagingCourse}
+            pagingSourceFactory = { moviePagingCourse }
         ).flowable
     }
 
-    fun getMovieDetails(movieId: Long): Single<Movie>{
+    fun getMovieDetails(movieId: Long): Single<Movie> {
         return movieService.getMovie(movieId)
             .subscribeOn(Schedulers.io())
     }
 
-    fun getCastDetails(castId: Long): Single<Cast>{
+    fun getCastDetails(castId: Long): Single<Cast> {
         return movieService.getCastDetails(castId)
             .subscribeOn(Schedulers.io())
+    }
+
+    fun getPersonImages(castId: Long): Single<List<ProfileImage>> {
+        return movieService.getPersonImages(castId)
+            .subscribeOn(Schedulers.io())
+            .map {
+                it.profiles
+            }
     }
 }

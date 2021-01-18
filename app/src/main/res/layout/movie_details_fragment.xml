@@ -31,12 +31,12 @@
 
             <ImageButton
                 android:id="@+id/ivBack"
-                android:src="@drawable/ic_baseline_arrow_back_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:layout_margin="16dp"
                 android:background="@drawable/riple_background"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
                 tools:ignore="ContentDescription" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -189,6 +189,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/layout_loading"/>
+    <include
+        layout="@layout/layout_loading"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

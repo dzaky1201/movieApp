@@ -3,6 +3,7 @@ package com.example.movie.network
 import com.example.movie.model.Cast
 import com.example.movie.model.Movie
 import com.example.movie.model.Movies
+import com.example.movie.model.Profile
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,4 +19,7 @@ interface MovieService {
 
     @GET("person/{id}")
     fun getCastDetails(@Path("id") castId: Long): Single<Cast>
+
+    @GET("person/{id}/images")
+    fun getPersonImages(@Path("id") castId: Long): Single<Profile>
 }

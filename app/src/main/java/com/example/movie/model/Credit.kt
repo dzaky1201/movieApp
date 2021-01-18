@@ -34,3 +34,19 @@ data class Cast(
     @Json(name = "also_known_as")
     val knownAs: List<String>?
 ) : Parcelable
+
+
+@JsonClass(generateAdapter = true)
+data class Profile(
+    val profiles: List<ProfileImage>
+)
+
+@JsonClass(generateAdapter = true)
+data class ProfileImage(
+    val width: Int?,
+    val height: Int?,
+    @Json(name = "file_path")
+    val path: String?,
+    @Json(name = "aspect_ratio")
+    val aspectRatio: Double?
+)

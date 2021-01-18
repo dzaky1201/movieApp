@@ -56,14 +56,14 @@ class MovieAdapter : PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(COMP
         }
     }
 
-    companion object{
-        private val COMPARATOR = object : DiffUtil.ItemCallback<Movie>(){
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-               return oldItem == newItem
+                return oldItem == newItem
             }
         }
     }

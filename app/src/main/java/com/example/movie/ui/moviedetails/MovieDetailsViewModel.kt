@@ -11,7 +11,6 @@ import com.example.movie.model.Resource
 import com.example.movie.repository.MovieRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import timber.log.Timber
 
 class MovieDetailsViewModel @ViewModelInject constructor(
     private val movieRepository: MovieRepository,
